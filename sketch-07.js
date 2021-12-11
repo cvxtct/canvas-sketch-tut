@@ -2,7 +2,8 @@ const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [1080, 1080]
+  dimensions: [1080, 1080],
+  //animate: true
 };
 
 let manager;
@@ -85,7 +86,7 @@ const sketch = ({ context, width, height }) => {
       const glyph = getGlyph(r);
 
       context.font = `${cell * 2}px ${fontFamily}`;
-      if (Math.random() < 0.1) context.font = `${cell * 6}px ${fontFamily}`;
+      if (Math.random() < 0.2) context.font = `${cell * 6}px ${fontFamily}`;
 
 
       context.fillStyle = `rgb(${r}, ${g}, ${b})`;
@@ -107,10 +108,11 @@ const getGlyph = (v) => {
   if (v < 100) return '.';
   if (v < 110) return '#';
   if (v < 120) return '>';
+  if (v < 130) return 'z';
   if (v < 150) return '-';
   if (v < 200) return '+';
 
-  const glyps = '_=#> /'.split('');
+  const glyps = '_=#>z /'.split('');
 
   return random.pick(glyps);
 };
