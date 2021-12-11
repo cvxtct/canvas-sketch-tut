@@ -5,6 +5,7 @@
 - https://www.w3schools.com/tags/ref_canvas.asp
 - https://github.com/mattdesl/canvas-sketch-util
 - https://github.com/mattdesl/canvas-sketch-util/blob/master/docs/random.md
+- https://www.w3schools.com/tags/ref_canvas.asp
 
 ## Exporting Artwork to PNG, GIF, MP4, SVG and Other Files
 - https://github.com/mattdesl/canvas-sketch/blob/master/docs/exporting-artwork.md
@@ -14,6 +15,7 @@
 
 ## Tools
 - https://cocopon.github.io/tweakpane/
+- https://picsum.photos
 
 ## Knowledge
 - https://en.wikipedia.org/wiki/Perlin_noise
