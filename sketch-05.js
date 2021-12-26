@@ -7,13 +7,22 @@ const settings = {
     animate: true
   };
 
+  function getRndColor() {
+    var r = 255*Math.random()|0,
+        g = 255*Math.random()|0,
+        b = 255*Math.random()|0;
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
 const sketch = () => {
 return ({ context, width, height, frame }) => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
+    // context.shadowBlur = 8;
+    // context.shadowColor = "black";
 
-    const cols = 10;
-    const rows = 10;
+    const cols = 20;
+    const rows = 20;
     const numCells = cols * rows;
 
     const gridw = width * 0.8;
@@ -47,11 +56,14 @@ return ({ context, width, height, frame }) => {
         context.rotate(angle);
 
         context.lineWidth = scale;
+     
 
         context.beginPath();
         context.moveTo(w * -0.5, 0);
         context.lineTo(w * 0.5, 0);
+        //context.strokeStyle = "gray";
         context.stroke();
+        
 
         context.restore();
     }

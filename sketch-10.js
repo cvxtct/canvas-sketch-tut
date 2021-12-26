@@ -3,7 +3,7 @@ const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: [2080, 1080],
   animate: true
 };
 
@@ -24,7 +24,7 @@ const sketch = ({ context, width, height }) => {
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    context.fillStyle = 'black';
     context.fillRect(0, 0, width, height);
 
     for (let i = 0; i < agents.length; i++) {
@@ -35,14 +35,21 @@ const sketch = ({ context, width, height }) => {
 
         const dist = agent.pos.getDistance(other.pos);
 
-        if (dist > 800) continue;
+        // if (dist > 400) continue;
         //context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
 
         context.beginPath();
+      
         context.moveTo(agent.pos.x, agent.pos.y);
-        // if (dist < 200) context.lineTo(other.pos.x, other.pos.y);
-        context.lineTo(other.pos.x, other.pos.y);
+        
+        if (dist < 400) context.lineTo(other.pos.x, other.pos.y);
+        // if (dist < 200) {
+        //   context.lineTo(other.pos.x, other.pos.y);
+        // } else {
+        //   context.quadraticCurveTo(other.pos.x, other.pos.y, agent.pos.y, agent.pos.x);
+        // };
         context.stroke();
+        context.strokeStyle = "white";
       }
     }
 
@@ -90,14 +97,12 @@ class Agent {
 
     context.save();
     context.translate(this.pos.x, this.pos.y);
-
     context.lineWidth = 0.5;
-
     context.beginPath();
     context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
     context.stroke();
-
+    context.strokeStyle = "white";
     context.restore();
   }
 }

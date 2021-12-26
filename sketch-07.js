@@ -1,15 +1,16 @@
+const context = require('bluebird/js/release/context');
 const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [1080, 1080],
-  //animate: true
+  dimensions: [5080, 2080],
+  // animate: true
 };
 
 let manager;
 
-let text = 'A';
-let fontSize = 800;
+let text = 'a';
+let fontSize = 100;
 let fontFamily = 'serif';
 
 const typeCanvas = document.createElement('canvas');
@@ -29,13 +30,12 @@ const sketch = ({ context, width, height }) => {
     typeContext.fillStyle = 'black';
     typeContext.fillRect(0, 0, cols , rows);
 
-    fontSize = cols * 1.2;
+    // fontSize = cols * 1.2;
 
     typeContext.fillStyle = 'white';
     typeContext.font = `${fontSize}px ${fontFamily}`;
     typeContext.textBaseLine = 'top ';
     typeContext.textAling = 'center';
-  
 
     const metrics = typeContext.measureText(text);
     const mx = metrics.actualBoundingBoxLeft * -1;
@@ -47,7 +47,6 @@ const sketch = ({ context, width, height }) => {
 
     const tx = (cols - mw) * 0.5 - mx;
     const ty = (rows - mh) * 0.5 - my;
-
 
     typeContext.save();
     typeContext.translate(tx, ty);
@@ -88,12 +87,12 @@ const sketch = ({ context, width, height }) => {
       context.font = `${cell * 2}px ${fontFamily}`;
       if (Math.random() < 0.2) context.font = `${cell * 6}px ${fontFamily}`;
 
-
       context.fillStyle = `rgb(${r}, ${g}, ${b})`;
 
       context.save();
       context.translate(x, y);
       context.translate(cell * 0.5, cell * 0.5);
+
       // context.fillRect(0, 0, cell, cell);
 
       context.fillText(glyph, 0, 0);
@@ -102,17 +101,42 @@ const sketch = ({ context, width, height }) => {
   };
 };
 
+// const loadImage = (path) => {
+//   var img = new Image();
+//   img.onload = function() {
+//     context.drawImage(img, 20,20,50,50)
+//   };
+//   img.src = path;
+//   return img;
+// }
 
+// loadImage('assets/img/sum.png');
+
+// TODO use math symbols here!
+ // var img_01 = new Image();
+    // img_01.src = './assets/img/sum.png'
+    // return typeContext.drawImage(img_01, 10,10);
 const getGlyph = (v) => {
-  if (v < 50) return '';
-  if (v < 100) return '.';
-  if (v < 110) return '#';
-  if (v < 120) return '>';
-  if (v < 130) return 'z';
-  if (v < 150) return '-';
-  if (v < 200) return '+';
 
-  const glyps = '_=#>z /'.split('');
+  if (v < 50) {
+    return '%';
+  };
+  if (v < 100) {
+    return ' *';
+  }
+  if (v < 110) return '#';
+  if (v < 120) return ',';
+  if (v < 130) return 'z';
+  if (v < 150) {
+   return '+';
+  }
+  if (v < 200) {
+    return '.';
+  }
+  if ( v < 220) return '@';
+
+  //const glyps = [img_01, img_02];
+  const glyps = '%. + * z,#'.split('');
 
   return random.pick(glyps);
 };
@@ -125,17 +149,14 @@ const onKeyUp = (e) => {
 
 document.addEventListener('keyup', onKeyUp);
 
-
 const start = async () => {
   manager = await canvasSketch(sketch, settings);
 };
 
 start();
 
-
-
-
 // const url = 'https://picsum.photos/200';
+// const url = 'assets/img/sum.png'
 
 // const loadMeSomeImage = (url) => {
 //   return new Promise((resolve, reject) => {
@@ -146,8 +167,10 @@ start();
 //   })
 // };
 
-// const start = async () => {
+// const rn = async () => {
 //   const img = await loadMeSomeImage(url);
-//   console.log('image widht'. img.width);
+//   console.log('image width'. img.width);
 //   console.log('this line');
 // };
+
+// rn();

@@ -55,7 +55,6 @@ return ({ context, width, height, frame }) => {
         // const scale = (n * 0.5 * 0.5) * 30;
         const scale = math.mapRange(n, -1, 1, params.scaleMin, params.scaleMax);
 
-
         context.save();
         context.translate(x, y);
         context.translate(margx, margy);

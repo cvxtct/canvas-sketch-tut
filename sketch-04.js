@@ -4,7 +4,7 @@ const math = require('canvas-sketch-util/math');
 const Tweakpane = require('tweakpane');
 
 const settings = {
-	dimensions: [ 1080, 1080 ],
+	dimensions: [ 2080, 1080 ],
 	animate: true
 };
 
@@ -22,7 +22,7 @@ const params = {
 
 const sketch = () => {
 	return ({ context, width, height, frame }) => {
-		context.fillStyle = 'white';
+		context.fillStyle = 'black';
 		context.fillRect(0, 0, width, height);
 
 		const cols = params.cols;
@@ -69,6 +69,7 @@ const sketch = () => {
 			context.beginPath();
 			context.moveTo(w * -0.5, 0);
 			context.lineTo(w *  0.5, 0);
+			context.strokeStyle = "white";
 			context.stroke();
 
 			context.restore();
