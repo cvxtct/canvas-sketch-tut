@@ -9,8 +9,6 @@ const settings = {
   // fps: 24
 };
 
-let text = ' ';
-
 const degToRad = (degrees) => {
   return degrees / 180 * Math.PI;
 };
@@ -83,10 +81,12 @@ const sketch = () => {
     c = Math.floor(255 / 12 * i);
     // context.font = '14px sans';
     // res = text.concat("//// " , grd, '°');
+    // light lines from the middle
     context.fillRect(100, 1, 400, 1)
+    // inner small circles
     context.beginPath();
     context.arc(200, random.range(50, 250), random.range(10, 30), 0, 2 * Math.PI);
-    context.lineWidth = 1;
+    context.lineWidth = random.range(1, 2);
     // context.fillText(res, 300, 1);
     context.transform(cos, sin, -sin, cos, 0, 0);
     context.fillStyle = "gray";
