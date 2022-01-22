@@ -22,7 +22,7 @@ const params = {
 
 const sketch = () => {
 	return ({ context, width, height, frame }) => {
-		context.fillStyle = 'black';
+		context.fillStyle = 'white';
 		context.fillRect(0, 0, width, height);
 
 		const cols = params.cols;
@@ -69,7 +69,7 @@ const sketch = () => {
 			context.beginPath();
 			context.moveTo(w * -0.5, 0);
 			context.lineTo(w *  0.5, 0);
-			context.strokeStyle = "white";
+			context.strokeStyle = "black";
 			context.stroke();
 
 			context.restore();

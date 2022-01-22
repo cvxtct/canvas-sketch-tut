@@ -3,7 +3,7 @@ const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
 
 const settings = {
-  dimensions: [2080, 1080],
+  dimensions: [2080, 580],
   animate: false
 };
 
@@ -16,7 +16,7 @@ const animate = () => {
 const sketch = ({ context, width, height }) => {
   const agents = [];
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 200; i++) {
     const x = random.range(0, width);
     const y = random.range(0, height);
 
@@ -24,7 +24,7 @@ const sketch = ({ context, width, height }) => {
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = 'black';
+    context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
     for (let i = 0; i < agents.length; i++) {
@@ -36,20 +36,21 @@ const sketch = ({ context, width, height }) => {
         const dist = agent.pos.getDistance(other.pos);
 
         // if (dist > 400) continue;
-        //context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
+        // context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
+        context.lineWidth = 0.2
 
         context.beginPath();
       
         context.moveTo(agent.pos.x, agent.pos.y);
   
-        if (dist < 300) context.lineTo(other.pos.x, other.pos.y);
+        if (dist < 80) context.lineTo(other.pos.x, other.pos.y);
         // if (dist < 200) {
         //   context.lineTo(other.pos.x, other.pos.y);
         // } else {
         //   context.quadraticCurveTo(other.pos.x, other.pos.y, agent.pos.y, agent.pos.x);
         // };
         context.stroke();
-        context.strokeStyle = "white";
+        context.strokeStyle = "black";
       }
     }
 
@@ -79,8 +80,8 @@ class Vector {
 class Agent {
   constructor(x, y) {
     this.pos = new Vector(x, y);
-    this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
-    this.radius = random.range(2, 8);
+    this.vel = new Vector(random.range(-1, 0.1), random.range(-1, 0.1));
+    this.radius = random.range(1, 10);
   }
 
   bounce(width, height) {
@@ -97,12 +98,12 @@ class Agent {
 
     context.save();
     context.translate(this.pos.x, this.pos.y);
-    context.lineWidth = 0.5;
+    context.lineWidth = 0.2;
     context.beginPath();
     context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
     context.stroke();
-    context.strokeStyle = "white";
+    context.strokeStyle = "black";
     context.restore();
     
   }
